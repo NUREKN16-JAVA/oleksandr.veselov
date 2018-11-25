@@ -1,4 +1,4 @@
-package ua.nure.cs.veselov;
+package ua.nure.cs.veselov.usermanagement;
 
 import java.io.Serializable;
 import java.time.Period;

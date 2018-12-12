@@ -3,13 +3,15 @@ package ua.nure.cs.veselov.usermanagement.db;
 import java.io.IOException;
 import java.util.Properties;
 
-public class DaoFactory {
+public abstract class DaoFactory {
     
-    private static final String USER_DAO = "dao.UserDAO";
-    private static final DaoFactory INSTANCE = new DaoFactory();   
-    private static final Properties properties;
+    private static final String DAO_FACTORY = "dao.Factory";
+    protected static final String USER_DAO = "dao.UserDAO";
+    protected static Properties properties;
     
-    private DaoFactory() { 
+    private static DaoFactory instance;   
+    
+    protected DaoFactory() { 
         
     }
     
@@ -22,22 +24,26 @@ public class DaoFactory {
         }
     }
     
-    public static DaoFactory getInstance() {
-        return INSTANCE;
+    public static void init(Properties properties) {
+        DaoFactory.properties = properties;
+        instance = null;
+    }
+    
+    public static synchronized DaoFactory getInstance() {
+        if (instance == null) {
+            try {
+                Class factoryClass = Class.forName(properties.getProperty(DAO_FACTORY));
+                instance = (DaoFactory) factoryClass.newInstance();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return instance;
     }
     
     protected ConnectionFactory getConnectionFactory() {
         return new ConnectionFactoryImplementation(properties);
     }
     
-    public UserDAO getUserDAO() {
-        UserDAO userDAO = null;
-        try {
-            Class clazz = Class.forName(properties.getProperty(USER_DAO));
-            userDAO = (UserDAO) clazz.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return userDAO;
-    }
+    public abstract UserDAO getUserDAO();
 }

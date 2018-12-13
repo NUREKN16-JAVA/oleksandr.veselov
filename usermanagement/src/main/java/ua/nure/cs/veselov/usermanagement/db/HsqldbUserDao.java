@@ -97,7 +97,6 @@ class HsqldbUserDao implements UserDAO {
     public Collection<User> findall() throws DatabaseException {
         try {
             Collection<User> users = new LinkedList<User>();
-            
             Connection connection = connectionFactory.createConnection();
             Statement statement = connection.createStatement();
             ResultSet usersSet = statement.executeQuery(FINDALL_QUERY);

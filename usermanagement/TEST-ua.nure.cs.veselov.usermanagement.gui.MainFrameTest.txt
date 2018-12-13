@@ -1,0 +1,5 @@
+Testsuite: ua.nure.cs.veselov.usermanagement.gui.MainFrameTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4,659 sec
+
+Testcase: testAddUser took 3,28 sec
+Testcase: testBrowseControls took 1,378 sec

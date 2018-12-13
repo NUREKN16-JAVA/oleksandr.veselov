@@ -9,6 +9,7 @@ public class DaoFactoryImplementation extends DaoFactory {
         try {
             Class clazz = Class.forName(properties.getProperty(USER_DAO));
             userDAO = (UserDAO) clazz.newInstance();
+            userDAO.setConnectionFactory(getConnectionFactory());
         } catch (Exception e) {
             e.printStackTrace();
         }

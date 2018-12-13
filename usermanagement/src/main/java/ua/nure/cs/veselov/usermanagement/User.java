@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 public class User implements Serializable {
@@ -15,6 +16,35 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
+    
+    public User(String firstName, String lastName, Date date) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = resetTime(date);
+    }
+    public User(Long id, String firstName, String lastName, Date date) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = resetTime(date);
+    }   
+    public User() {
+    }   
+    public User(User user) {
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.dateOfBirth = resetTime(user.getDateOfBirth());
+    }
+    private Date resetTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();  
+    }
     public Long getId() {
         return id;
     }

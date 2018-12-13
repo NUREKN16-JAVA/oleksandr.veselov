@@ -94,14 +94,11 @@ public class MainFrameTest extends JFCTestCase {
         JTextField lastNameField = (JTextField) find(JTextField.class, "lastNameField");
         JTextField dateOfBirthField = (JTextField) find(JTextField.class, "dateOfBirthField");
 
-        getHelper().sendString(
-                new StringEventData(this, firstNameField, firstName));
-        getHelper().sendString(
-                new StringEventData(this, lastNameField, lastName));
+        getHelper().sendString(new StringEventData(this, firstNameField, firstName));
+        getHelper().sendString(new StringEventData(this, lastNameField, lastName));
         DateFormat formatter = DateFormat.getDateInstance();
         String date = formatter.format(now);
-        getHelper().sendString(
-                new StringEventData(this, dateOfBirthField, date));
+        getHelper().sendString(new StringEventData(this, dateOfBirthField, date));
     }
     
     @Test

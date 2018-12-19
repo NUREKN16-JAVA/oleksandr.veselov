@@ -19,6 +19,7 @@ class HsqldbUserDao implements UserDAO {
     private static final String FINDALL_QUERY = "SELECT * FROM users";
     private static final String FIND_QUERY = "SELECT * FROM users WHERE id = ?";
     private static final String IDENTITY_CALL = "call IDENTITY()";
+    private static final String SELECT_BY_NAME = "SELECT id, firstname, lastname, dateofbirth FROM users WHERE firstname=? AND lastname=?";
     private ConnectionFactory connectionFactory;
 
     public ConnectionFactory getConnectionFacory() {
@@ -151,5 +152,29 @@ class HsqldbUserDao implements UserDAO {
         } catch (SQLException e) {
             throw new DatabaseException(e);
         }
+    }
+
+    @Override
+    public Collection find(String firstName, String lastName) throws DatabaseException {
+        Collection<User> users = new LinkedList<User>();
+        
+        try {
+            Connection connection = connectionFactory.createConnection();
+            PreparedStatement findStatement = connection.prepareStatement(SELECT_BY_NAME);
+            findStatement.setString(1, firstName);
+            findStatement.setString(2, lastName);
+            ResultSet usersSet = findStatement.executeQuery();
+            while (usersSet.next()) {
+                User user = new User();
+                user.setId(new Long(usersSet.getLong(1)));
+                user.setFirstName(usersSet.getString(2));
+                user.setLastName(usersSet.getString(3));
+                user.setDateOfBirth(usersSet.getDate(4));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
+        return users;
     }
 }

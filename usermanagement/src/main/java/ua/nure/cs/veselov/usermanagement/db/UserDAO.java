@@ -22,5 +22,7 @@ public interface UserDAO {
     
     void delete(final User user) throws DatabaseException;
     
-    void setConnectionFactory(final ConnectionFactory connectionFactory);
+    Collection find(String firstName, String lastName) throws DatabaseException;
+    
+    void setConnectionFactory(final ConnectionFactory connectionFactory); 
 }

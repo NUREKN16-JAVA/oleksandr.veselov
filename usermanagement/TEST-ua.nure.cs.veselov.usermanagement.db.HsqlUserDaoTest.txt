@@ -1,8 +1,8 @@
 Testsuite: ua.nure.cs.veselov.usermanagement.db.HsqlUserDaoTest
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,447 sec
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0,531 sec
 
-Testcase: testFindAll took 0,403 sec
-Testcase: testFind took 0,007 sec
-Testcase: testCreate took 0,016 sec
+Testcase: testFindAll took 0,348 sec
+Testcase: testFind took 0,011 sec
+Testcase: testCreate took 0,149 sec
 Testcase: testDelete took 0,014 sec
-Testcase: testUpdate took 0,006 sec
+Testcase: testUpdate took 0,009 sec

@@ -12,7 +12,7 @@
         <p>Last name: ${user.lastName}</p>
         <p>Date of birth: <fmt:formatDate value="${user.dateOfBirth}" type="date" dateStyle="medium"/></p>
         <br>
-        <input type="submit" name="cancelButton" value="Ok">
+        <input type="submit" name="okButton" value="Ok">
     </form>
     
     <c:if test="${requestScope.error != null}">

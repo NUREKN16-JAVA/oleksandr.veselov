@@ -55,7 +55,7 @@ public class BrowseServletTest extends MockServletTestCase {
     
     @Test
     public void testDelete() {
-        User user = new User(1000L, "John", "Doe", new Date());
+        User user = new User(1000L, "Alexander", "Veselov", new Date());
         getMockUserDao().expectAndReturn("find", 1000L, user);
         getMockUserDao().expect("delete", user);
         addRequestParameter("deleteButton", "Delete");
@@ -73,13 +73,14 @@ public class BrowseServletTest extends MockServletTestCase {
 
     @Test
     public void testDetails() {
-        User user = new User(1000L, "John", "Doe", new Date());
+        User user = new User(1000L, "Alexander", "Veselov", new Date());
         getMockUserDao().expectAndReturn("find", 1000L, user);
         addRequestParameter("detailsButton", "Details");
         addRequestParameter("id", "1000");
         doPost();
-        User userInSession = (User) getWebMockObjectFactory()
-                .getMockSession().getAttribute("user");
+        User userInSession = (User) getWebMockObjectFactory().
+                                    getMockSession().
+                                    getAttribute("user");
         assertNotNull(userInSession);
         assertSame(user, userInSession);
     }
